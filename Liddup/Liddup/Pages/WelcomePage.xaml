@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Liddup.Pages.WelcomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Liddup.Behaviors;assembly=Liddup"
+    xmlns:controls="clr-namespace:Liddup.Controls;assembly=Liddup"
+    xmlns:effects="clr-namespace:Liddup.Effects;assembly=Liddup"
+    xmlns:fcteffects="clr-namespace:FormsCommunityToolkit.Effects;assembly=FormsCommunityToolkit.Effects"
+    xmlns:ffsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:local="clr-namespace:Liddup.Pages"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+            <On Platform="Android, WinPhone, UWP" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <AbsoluteLayout BackgroundColor="Black">
+        <Image
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 600"
+            AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+            Aspect="AspectFill"
+            Source="crowd_gradient_colored.png"
+            VerticalOptions="StartAndExpand" />
+        <ffsvg:SvgCachedImage
+            Margin="0,40,0,0"
+            AbsoluteLayout.LayoutBounds="0.5, 0, 300, 100"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            HeightRequest="100"
+            Source="resource://Liddup.Resources.liddup_wordmark_white.svg"
+            VerticalOptions="Start"
+            WidthRequest="300" />
+
+        <StackLayout
+            Margin="0,100,0,0"
+            AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Label
+                Margin="0,0,0,10"
+                FontSize="24"
+                Style="{StaticResource TitleStyle}"
+                Text="Enter your invite code"
+                TextColor="White" />
+
+            <controls:UnderlinedEntry
+                x:Name="roomCodeEntry"
+                Margin="0,0,0,10"
+                BackgroundColor="Transparent"
+                BorderColor="White"
+                FontSize="28"
+                HorizontalTextAlignment="Center"
+                LetterSpacing="0.3"
+                TextColor="White">
+                <controls:UnderlinedEntry.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="GlacialIndifference-Regular" />
+                        <On Platform="Android" Value="GlacialIndifference-Regular.otf#GlacialIndifference-Regular" />
+                    </OnPlatform>
+                </controls:UnderlinedEntry.FontFamily>
+                <controls:UnderlinedEntry.Effects>
+                    <fcteffects:EntryCapitalizeKeyboard />
+                    <fcteffects:EntryDisableAutoCorrect />
+                </controls:UnderlinedEntry.Effects>
+                <controls:UnderlinedEntry.Behaviors>
+                    <behaviors:EntryLengthValidatorBehavior MaxLength="8" />
+                </controls:UnderlinedEntry.Behaviors>
+            </controls:UnderlinedEntry>
+
+            <controls:BorderedButton
+                Command="{Binding JoinRoomCommand}"
+                CommandParameter="{Binding Source={x:Reference roomCodeEntry}, Path=Text}"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Style="{StaticResource TransparentButtonStyle}"
+                Text="Join" />
+
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                Color="{StaticResource Red}" />
+            <Label
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBusy}"
+                Style="{StaticResource SubtitleStyle}"
+                Text="Joining room..." />
+
+            <Label
+                Margin="0,100,0,0"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Style="{StaticResource SubtitleStyle}"
+                Text="Or host your own room"
+                TextColor="{StaticResource Red}">
+                <Label.Effects>
+                    <effects:UnderlineEffect />
+                </Label.Effects>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CreateRoomCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>
