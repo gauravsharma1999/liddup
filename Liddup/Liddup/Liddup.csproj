@@ -60,7 +60,7 @@
     <PackageReference Include="FormsCommunityToolkit.Effects" Version="1.0.0.110-beta" />
     <PackageReference Include="FreshMvvm" Version="2.2.3" />
     <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PCLStorage" Version="1.0.2" />
     <PackageReference Include="Plugin.MediaManager" Version="0.4.5" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.2.4" />
